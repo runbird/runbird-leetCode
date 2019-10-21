@@ -1,4 +1,4 @@
-package com.scy;
+package com.scy.algorithm;
 
 /**
  * 描述:

@@ -1,4 +1,4 @@
-package com.scy;
+package com.scy.thread;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -26,8 +26,8 @@ import java.util.concurrent.CountDownLatch;
  */
 public class PrintInOrder {
 
-//    private CountDownLatch second = new CountDownLatch(1);
-//    private CountDownLatch third = new CountDownLatch(1);
+    private CountDownLatch second = new CountDownLatch(1);
+    private CountDownLatch third = new CountDownLatch(1);
 
     public PrintInOrder() {
     }
@@ -36,41 +36,41 @@ public class PrintInOrder {
 
         // printFirst.run() outputs "first". Do not change or remove this line.
         printFirst.run();
-  //      second.countDown();
+        second.countDown();
     }
 
     public void second(Runnable printSecond) throws InterruptedException {
- //       second.await();
+        second.await();
         // printSecond.run() outputs "second". Do not change or remove this line.
         printSecond.run();
- //       third.countDown();
+        third.countDown();
     }
 
     public void third(Runnable printThird) throws InterruptedException {
- //       third.await();
+        third.await();
         // printThird.run() outputs "third". Do not change or remove this line.
         printThird.run();
     }
 
     public static void main(String[] args) throws InterruptedException {
         PrintInOrder order = new PrintInOrder();
-        new Thread(()-> {
+        new Thread(() -> {
             try {
-                order.first(()-> System.out.println("first"));
+                order.first(() -> System.out.println("first"));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
-        new Thread(()-> {
+        new Thread(() -> {
             try {
-                order.second(()-> System.out.println("second"));
+                order.second(() -> System.out.println("second"));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
-        new Thread(()-> {
+        new Thread(() -> {
             try {
-                order.third(()-> System.out.println("third"));
+                order.third(() -> System.out.println("third"));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
