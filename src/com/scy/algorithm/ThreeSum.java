@@ -41,8 +41,8 @@ public class ThreeSum {
                         results.add(Arrays.asList(nums[i], nums[j], nums[r]));
                         // 缩小范围
                         while (j < r && nums[j] == nums[j + 1]) j++;
-                        while (j < r && nums[r] == nums[r - 1]) j++;
-                        r--;
+                        while (j < r && nums[r] == nums[r - 1]) r--;
+                        j++;
                     } else if (sum > nums[j] + nums[r]) {
                         while (j < r && nums[j] == nums[j + 1]) j++;
                         j++;
@@ -57,7 +57,7 @@ public class ThreeSum {
     }
 
     public static void main(String[] args) {
-       int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] nums = {-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6};
         List<List<Integer>> lists = ThreeSum.threeSum(nums);
         System.out.println(lists);
     }
