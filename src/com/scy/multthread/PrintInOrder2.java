@@ -1,6 +1,6 @@
-package com.scy.thread;
+package com.scy.multthread;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
 
 /**
  * 类名： PrintInOrder <br>
@@ -24,36 +24,38 @@ import java.util.concurrent.CountDownLatch;
  * @author suocaiyuan
  * @version V1.0
  */
-public class PrintInOrder {
+public class PrintInOrder2 {
 
-    private CountDownLatch second = new CountDownLatch(1);
-    private CountDownLatch third = new CountDownLatch(1);
+    private Semaphore first = new Semaphore(1);
+    private Semaphore second = new Semaphore(0);
+    private Semaphore third = new Semaphore(0);
 
-    public PrintInOrder() {
+    public PrintInOrder2() {
     }
 
     public void first(Runnable printFirst) throws InterruptedException {
 
         // printFirst.run() outputs "first". Do not change or remove this line.
+        first.acquire();
         printFirst.run();
-        second.countDown();
+        second.release();
     }
 
     public void second(Runnable printSecond) throws InterruptedException {
-        second.await();
         // printSecond.run() outputs "second". Do not change or remove this line.
+        second.acquire();
         printSecond.run();
-        third.countDown();
+        third.release();
     }
 
     public void third(Runnable printThird) throws InterruptedException {
-        third.await();
         // printThird.run() outputs "third". Do not change or remove this line.
+        third.acquire();
         printThird.run();
     }
 
     public static void main(String[] args) throws InterruptedException {
-        PrintInOrder order = new PrintInOrder();
+        PrintInOrder2 order = new PrintInOrder2();
         new Thread(() -> {
             try {
                 order.first(() -> System.out.println("first"));

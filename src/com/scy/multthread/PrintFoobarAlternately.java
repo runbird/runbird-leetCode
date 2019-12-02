@@ -1,9 +1,8 @@
-package com.scy.thread;
+package com.scy.multthread;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Semaphore;
 
 /**
  * 类名： PrintFoobarAlternately <br>
@@ -38,37 +37,37 @@ import java.util.concurrent.Semaphore;
  * @author suocaiyuan
  * @version V1.0
  */
-public class PrintFoobarAlternately2 {
-    private Semaphore foo = new Semaphore(1);
-    private Semaphore bar = new Semaphore(0);
-
+public class PrintFoobarAlternately {
+    private CountDownLatch countDown = new CountDownLatch(1);
+    private CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
 
     private int n;
 
-    public PrintFoobarAlternately2(int n) {
+    public PrintFoobarAlternately(int n) {
         this.n = n;
     }
 
     public void foo(Runnable printFoo) throws InterruptedException, BrokenBarrierException {
         for (int i = 0; i < n; i++) {
             // printFoo.run() outputs "foo". Do not change or remove this line.
-            foo.acquire();
             printFoo.run();
-            bar.release();
+            countDown.countDown();
+            cyclicBarrier.await();
         }
     }
 
     public void bar(Runnable printBar) throws InterruptedException, BrokenBarrierException {
         for (int i = 0; i < n; i++) {
             // printBar.run() outputs "bar". Do not change or remove this line.
-            bar.acquire();
+            countDown.await();
             printBar.run();
-            foo.release();
+            countDown = new CountDownLatch(1);
+            cyclicBarrier.await();
         }
     }
 
     public static void main(String[] args) {
-        PrintFoobarAlternately2 order = new PrintFoobarAlternately2(10);
+        PrintFoobarAlternately order = new PrintFoobarAlternately(10);
         new Thread(() -> {
             try {
                 order.foo(() -> System.out.print("foo"));

@@ -1,6 +1,6 @@
 package com.scy.algorithm;
 
-import jdk.nashorn.internal.parser.JSONParser;
+import com.scy.algorithm.array.ListNode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +12,8 @@ import java.util.List;
  *     输出: 1->2->3->4->5
  * 创建日期： 2019/10/16 <br>
  *
+ * 来源：力扣（LeetCode）203
+ * https://leetcode-cn.com/problems/remove-linked-list-elements/
  * @author suocaiyuan
  * @version V1.0
  */

@@ -1,4 +1,4 @@
-package com.scy.thread;
+package com.scy.multthread;
 
 import java.util.concurrent.*;
 import java.util.function.IntConsumer;

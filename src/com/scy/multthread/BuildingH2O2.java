@@ -1,5 +1,7 @@
-package com.scy.thread;
+package com.scy.multthread;
 
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -37,38 +39,43 @@ import java.util.concurrent.Semaphore;
  * @author suocaiyuan
  * @version V1.0
  */
-public class BuildingH2O {
+public class BuildingH2O2 {
     private Semaphore h = new Semaphore(2);
     private Semaphore o = new Semaphore(1);
-    private Semaphore h_react = new Semaphore(0);
-    private Semaphore o_react = new Semaphore(0);
+    private CyclicBarrier cyclicbarrier = new CyclicBarrier(3);
 
-    public BuildingH2O() {
+    public BuildingH2O2() {
     }
 
     public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
         h.acquire();
         // releaseHydrogen.run() outputs "H". Do not change or remove this line.
-        h_react.release();
-        o_react.acquire();//
+        try {
+            cyclicbarrier.await();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
         releaseHydrogen.run();
-        o.release();
+        h.release();
     }
 
     public void oxygen(Runnable releaseOxygen) throws InterruptedException {
 
         // releaseOxygen.run() outputs "O". Do not change or remove this line.
         o.acquire();
-        o_react.release(2);
-        h_react.acquire(2);
+        try {
+            cyclicbarrier.await();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
         releaseOxygen.run();
-        h.release();
+        o.release();
     }
 
 
 
     public static void main(String[] args) throws InterruptedException {
-        BuildingH2O h20 = new BuildingH2O();
+        BuildingH2O2 h20 = new BuildingH2O2();
         for (int i = 0; i < 9; i++) {
             h20.hydrogen(() -> System.out.print("H"));
             h20.oxygen(() -> System.out.print("O"));

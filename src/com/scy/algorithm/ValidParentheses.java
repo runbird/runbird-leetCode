@@ -12,30 +12,31 @@ import java.util.Stack;
  * 左括号必须用相同类型的右括号闭合。
  * 左括号必须以正确的顺序闭合。
  * 注意空字符串可被认为是有效字符串。
- * <p>
+ * 
  * 输入: "()"
  * 输出: true
- * <p>
+ * 
  * 输入: "()[]{}"
  * 输出: true
- * <p>
+ * 
  * 输入: "(]"
  * 输出: false
- * <p>
+ * 
  * 输入: "([)]"
  * 输出: false
- * <p>
+ * 
  * 输入: "{[]}"
  * 输出: true
+ * 来源：力扣（LeetCode）20
  * 创建日期： 2019/10/16 <br>
- *
+ * https://leetcode-cn.com/problems/valid-parentheses/
  * @author suocaiyuan
  * @version V1.0
  */
 public class ValidParentheses {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        Map<Character, Character> dict = new HashMap<>();
+        Map<Character, Character> dict = new HashMap<>(3);
         dict.put(')', '(');
         dict.put(']', '[');
         dict.put('}', '{');
