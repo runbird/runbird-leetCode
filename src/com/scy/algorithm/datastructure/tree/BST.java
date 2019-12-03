@@ -1,4 +1,4 @@
-package com.scy.algorithm.tree;
+package com.scy.algorithm.datastructure.tree;
 
 /**
  * 类名： BST <br>

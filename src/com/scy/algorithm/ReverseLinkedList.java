@@ -1,6 +1,6 @@
 package com.scy.algorithm;
 
-import com.scy.algorithm.array.ListNode;
+import com.scy.algorithm.datastructure.array.ListNode;
 
 /**
  * @desc: 反转一个单链表。

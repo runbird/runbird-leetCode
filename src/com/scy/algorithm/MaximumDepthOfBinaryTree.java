@@ -1,6 +1,6 @@
 package com.scy.algorithm;
 
-import com.scy.algorithm.tree.TreeNode;
+import com.scy.algorithm.datastructure.tree.TreeNode;
 
 /**
  * 给定一个二叉树，找出其最大深度。

@@ -1,6 +1,4 @@
-package com.scy.algorithm.tree;
-
-import javax.swing.tree.TreeNode;
+package com.scy.algorithm.datastructure.tree;
 
 /**
  * 类名： BuildTree <br>

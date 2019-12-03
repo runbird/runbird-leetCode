@@ -27,4 +27,4 @@
 -- 来源：力扣（LeetCode）175
 -- 链接：https://leetcode-cn.com/problems/combine-two-tables
 -- 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-select t.FirstName, t.LastName, v.City, v.State from Person t left join Address v where t.PersonId = v.PersonId
+select t.FirstName, t.LastName, v.City, v.State from Person t left join Address v on t.PersonId = v.PersonId

@@ -3,7 +3,6 @@ package com.scy.algorithm;
 /**
  * @desc:
  * 给定一个整数数组，判断数组中是否有两个不同的索引 i 和 j，使得 nums [i] 和 nums [j] 的差的绝对值最大为 t，并且 i 和 j 之间的差的绝对值最大为 ķ。
- *
  * 示例 1:
  *
  * 输入: nums = [1,2,3,1], k = 3, t = 0
@@ -26,10 +25,20 @@ package com.scy.algorithm;
 public class ContainsDuplicateIII {
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
         //TODO
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = Math.max(i - k, 0); j < i; j++) {
+                if (Math.abs(nums[i] - nums[j]) <= t)  return true;
+            }
+        }
         return false;
     }
 
     public static void main(String[] args) {
-
+        ContainsDuplicateIII duplicateIII = new ContainsDuplicateIII();
+        int[] nums = {1,2,3,1};
+        int k = 3;
+        int t = 0;
+        boolean b = duplicateIII.containsNearbyAlmostDuplicate(nums, k, t);
+        System.out.println(b);
     }
 }

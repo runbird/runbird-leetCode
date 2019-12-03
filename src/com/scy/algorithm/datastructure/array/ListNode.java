@@ -1,4 +1,4 @@
-package com.scy.algorithm.array;
+package com.scy.algorithm.datastructure.array;
 
 /**
  * @desc:
