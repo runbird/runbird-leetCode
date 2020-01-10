@@ -1,6 +1,8 @@
 package com.scy.algorithm;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -30,14 +32,18 @@ import java.util.TreeMap;
 public class ContainsDuplicate {
     public boolean containsDuplicate(int[] nums) {
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (map.containsKey(nums[i]))
+        for (int num : nums) {
+            if (map.containsKey(num))
                 return true;
-            map.put(nums[i], 1);
+            map.put(num, 1);
         }
         return false;
     }
 
+    //时间复杂度 : O(nlog n)
+    //排序的复杂度是 O(nlog n)，扫描的复杂度是 O(n)。整个算法主要由排序过程决定，因此是O(nlogn)。
+    //空间复杂度 : O(1)。
+    //这取决于具体的排序算法实现，通常而言，使用 堆排序 的话，是O(1)。
     public boolean containsDuplicate2(int[] nums) {
         Arrays.sort(nums);
         for (int i = 0; i < nums.length - 1; ++i) {
@@ -47,10 +53,37 @@ public class ContainsDuplicate {
         return false;
     }
 
+    //时间复杂度 : O(n)
+    //空间复杂度 : O(n) 哈希表占用的空间与元素数量是线性关系。
+    public boolean containsDuplicate3(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                return true;
+            }
+            map.put(num, 1);
+        }
+        return false;
+    }
+
 
     public static void main(String[] args) {
-        int[] nums = {1,1};
+        int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 34, 456, 768, 132, 7890, 123, 57, 77, 1};
         ContainsDuplicate duplicate = new ContainsDuplicate();
-        System.out.println(duplicate.containsDuplicate(nums));
+        
+        long start = System.nanoTime();
+        duplicate.containsDuplicate(nums);
+        long time = System.nanoTime() - start;
+        System.out.println(time);
+
+        long start1 = System.nanoTime();
+        duplicate.containsDuplicate2(nums);
+        long time1 = System.nanoTime() - start1;
+        System.out.println(time1);
+
+        long start2 = System.nanoTime();
+        duplicate.containsDuplicate3(nums);
+        long time2 = System.nanoTime() - start2;
+        System.out.println(time2);
     }
 }
