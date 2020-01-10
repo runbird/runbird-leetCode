@@ -30,9 +30,9 @@ public class SingleNumber {
     public int singleNumber1(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            Integer count = map.get(i);
+            Integer count = map.get(nums[i]);
             count = count == null ? 1 : ++count;
-            map.put(i, count);
+            map.put(nums[i], count);
         }
         for (Integer key : map.keySet()) {
             if (map.get(key) == 1) {
