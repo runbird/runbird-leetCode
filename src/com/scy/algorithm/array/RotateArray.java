@@ -1,6 +1,4 @@
-package com.scy.algorithm;
-
-import java.util.HashMap;
+package com.scy.algorithm.array;
 
 /**
  * 类名： RotateArray <br>
