@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.array;
 
 /**
  * 类名： BinarySubarraysWithSum <br>

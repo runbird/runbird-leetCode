@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.heap;
 
 import java.util.*;
 
@@ -27,7 +27,27 @@ import java.util.*;
  * @author suocaiyuan
  * @version V1.0
  */
-public class TopKFrequentElements2 {
+public class TopKFrequentElements {
+
+    private class Frequence implements Comparable<Frequence> {
+        public int e, freq;
+
+        public Frequence(int e, int freq) {
+            this.e = e;
+            this.freq = freq;
+        }
+
+        @Override
+        public int compareTo(Frequence o) {
+            if (this.freq > o.freq) {
+                return 1;
+            } else if (this.freq < o.freq) {
+                return -1;
+            }
+            return 0;
+        }
+    }
+
 
     public List<Integer> topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> source = new HashMap<>();
@@ -38,26 +58,25 @@ public class TopKFrequentElements2 {
                 source.put(num, 1);
         }
 
-      //  PriorityQueue<Integer> queue = new PriorityQueue<>( (o1, o2) -> source.get(o1) - source.get(o2));
-        PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(source::get));
+        PriorityQueue<Frequence> queue = new PriorityQueue<>();
         for (int key : source.keySet()) {
             if (queue.size() < k) {
-                queue.add(key);
-            } else if (source.get(key) > source.get(queue.peek())) {
+                queue.add(new Frequence(key, source.get(key)));
+            } else if (queue.peek().freq < source.get(key)) {
                 queue.poll();
-                queue.offer(key);
+                queue.offer(new Frequence(key, source.get(key)));
             }
         }
         List<Integer> list = new ArrayList<>();
         while (!queue.isEmpty())
-            list.add(queue.remove());
+            list.add(queue.remove().e);
         return list;
     }
 
     public static void main(String[] args) {
         int[] nums = {4,1,-1,2,-1,2,3};
         int k = 2;
-        TopKFrequentElements2 test = new TopKFrequentElements2();
+        TopKFrequentElements test = new TopKFrequentElements();
         List<Integer> integers = test.topKFrequent(nums, k);
         System.out.println(integers.toString());
     }

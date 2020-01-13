@@ -1,4 +1,4 @@
-package com.scy.algorithm.datastructure.tree;
+package com.scy.algorithm.tree;
 
 
 
@@ -30,6 +30,8 @@ package com.scy.algorithm.datastructure.tree;
  * @version V1.0
  */
 public class BinarySearchTreeToGreaterSumTree {
+
+    //TODO
 
 
 

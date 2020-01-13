@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.string;
 
 /**
  * 类名： PalindromeNumber <br>

@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.string;
 
 import java.util.HashMap;
 import java.util.Map;

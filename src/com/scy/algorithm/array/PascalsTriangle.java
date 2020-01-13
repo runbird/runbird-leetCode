@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.array;
 
 import java.util.ArrayList;
 import java.util.List;

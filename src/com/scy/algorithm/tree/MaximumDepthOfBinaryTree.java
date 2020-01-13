@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.tree;
 
 import com.scy.algorithm.datastructure.tree.TreeNode;
 

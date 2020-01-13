@@ -1,4 +1,4 @@
-package com.scy.algorithm;
+package com.scy.algorithm.linkedlist;
 
 import com.scy.algorithm.datastructure.array.ListNode;
 

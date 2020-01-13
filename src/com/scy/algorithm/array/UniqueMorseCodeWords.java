@@ -1,8 +1,7 @@
-package com.scy.algorithm;
+package com.scy.algorithm.array;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * 类名： UniqueMorseCodeWords <br>
