@@ -53,12 +53,27 @@ public class ImplementStrstr {
         return -1;
     }
 
+    //暴力法
+    public int strStr2(String haystack, String needle) {
+        int m = haystack.length();
+        int n = needle.length();
+        if (needle.isEmpty()) return 0;
+        for (int i = 0; i < m - n + 1; i++) {
+            int j;
+            for (j = 0; j < n; j++) {
+                if (haystack.charAt(i + j) != needle.charAt(j)) break;
+            }
+            if (n == j) return i;
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         // String haystack ="hello", needle = "ll";
-       // String haystack = "aaaaa", needle = "bba";
+        // String haystack = "aaaaa", needle = "bba";
         String haystack = "mississippi", needle = "issip";
         ImplementStrstr str = new ImplementStrstr();
-        System.out.println(str.strStr(haystack, needle));
+        System.out.println(str.strStr2(haystack, needle));
     }
 }
 
