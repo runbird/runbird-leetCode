@@ -49,37 +49,107 @@ package com.scy.algorithm.string;
  */
 public class StringToIntegeratoi {
     public int myAtoi(String str) {
-        char[] arr = str.toCharArray();
-        if (arr[0] >= 'a' && arr[0] < 'z' || arr[0] >= 'A' && arr[0] < 'Z') return 0;
-        int length = str.length();
-        //1 首不能为数字
-        boolean flag = false;
-        int start = 0, end = 0;
-        for (int i = 0; i < length; i++) {
-            if (arr[i] != ' ' && !(arr[i] >= 'a' && arr[i] < 'z' || arr[i] >= 'A' && arr[i] < 'Z')) {
-                arr[start++] = arr[i];
-            } else {
-                return 0;
+        if (null == str) return 0;
+        String strr = str.trim();
+        //存储最终过滤出来的字符串
+        String result = null;
+        if (!strr.isEmpty()) {
+            char c = strr.charAt(0);
+            if (c >= '0' && c <= '9' || c == '+' || c == '-') {
+                result = strr.substring(0, 1);
+                //这时候循环只要数字，因为正负号只能出现在第一位
+                for (int i = 1; i < strr.length(); i++) {
+                    if (strr.charAt(i) >= '0' && strr.charAt(i) <= '9') {
+                        result = strr.substring(0, i + 1);
+                    }
+                    //这是遇到不符合要求的字符，直接忽略剩余元素
+                    else {
+                        break;
+                        //return 0  如果遇到 3.1415这类则不正确
+                    }
+                }
             }
         }
-        start--;
-        int result = 0;
-        if (arr[0] == '-') {
-            while (end++ < start) {
-                result = result * 10 + (arr[end] - '0');
-                if (result >= Integer.MAX_VALUE / 10) {
-                    return Integer.MIN_VALUE;
+        if (result == null || result.equals("+") || result.equals("-")) return 0;
+        int num = 0;
+        //使用异常机制打印结果
+        try {
+            num = Integer.parseInt(result);
+        } catch (Exception e) {
+            if (result.charAt(0) == '-')
+                return Integer.MIN_VALUE;
+            return Integer.MAX_VALUE;
+        }
+        return num;
+    }
+
+    static NumberFormatException forInputString(String s, int radix) {
+        return new NumberFormatException("For input string: \"" + s + "\"" +
+                (radix == 10 ?
+                        "" :
+                        " under radix " + radix));
+    }
+
+    //source code from jdk12
+    public static int parseInt(String s, int radix)
+            throws IllegalArgumentException {
+        /*
+         * WARNING: This method may be invoked early during VM initialization
+         * before IntegerCache is initialized. Care must be taken to not use
+         * the valueOf method.
+         */
+
+        if (s == null) {
+            throw new NumberFormatException("null");
+        }
+
+        if (radix < Character.MIN_RADIX) {
+            throw new NumberFormatException("radix " + radix +
+                    " less than Character.MIN_RADIX");
+        }
+
+        if (radix > Character.MAX_RADIX) {
+            throw new NumberFormatException("radix " + radix +
+                    " greater than Character.MAX_RADIX");
+        }
+        boolean negative = false;
+        int i = 0, len = s.length();
+        int limit = -Integer.MAX_VALUE;
+
+        if (len > 0) {
+            char firstChar = s.charAt(0);
+            if (firstChar < '0') { // Possible leading "+" or "-"
+                if (firstChar == '-') {
+                    negative = true;
+                    limit = Integer.MIN_VALUE;
+                } else if (firstChar != '+') {
+                 //   throw NumberFormatException.forInputString(s, radix);
                 }
+
+                if (len == 1) { // Cannot have lone "+" or "-"
+                 //   throw NumberFormatException.forInputString(s, radix);
+                }
+                i++;
             }
-            return -result;
+            int multmin = limit / radix;
+            int result = 0;
+            while (i < len) {
+                // Accumulating negatively avoids surprises near MAX_VALUE
+                int digit = Character.digit(s.charAt(i++), radix);
+                if (digit < 0 || result < multmin) {
+                 //   throw NumberFormatException.forInputString(s, radix);
+                }
+                result *= radix;
+                if (result < limit + digit) {
+                 //   throw NumberFormatException.forInputString(s, radix);
+                }
+                result -= digit;
+            }
+            //GJ
+            return negative ? result : -result;
         } else {
-            while (end <= start) {
-                result = result * 10 + (arr[end++] - '0');
-                if (result >= Integer.MAX_VALUE / 10) {
-                    return Integer.MAX_VALUE;
-                }
-            }
-            return result;
+          //  throw NumberFormatException.forInputString(s, radix);
+            throw new IllegalArgumentException("");
         }
     }
 

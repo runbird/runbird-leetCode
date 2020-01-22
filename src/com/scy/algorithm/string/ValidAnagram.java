@@ -56,7 +56,7 @@ public class ValidAnagram {
         return true;
     }
 
-    //GOOD
+    //GJ
     public boolean isAnagram2(String s, String t) {
         if (s.length() != t.length()) return false;
         int[] dict = new int[26];
