@@ -36,7 +36,7 @@ public class ReverseLinkedList {
             pre = cur;
             cur = temp;
         }
-        return cur;
+        return pre;
     }
 
     /**
