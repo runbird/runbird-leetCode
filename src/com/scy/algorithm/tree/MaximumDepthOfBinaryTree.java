@@ -2,6 +2,9 @@ package com.scy.algorithm.tree;
 
 import com.scy.algorithm.datastructure.tree.TreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 给定一个二叉树，找出其最大深度。
  *
@@ -25,20 +28,37 @@ import com.scy.algorithm.datastructure.tree.TreeNode;
 public class MaximumDepthOfBinaryTree {
 
     public int maxDepth(TreeNode root) {
-        //TODO
-//        if (root == null) return 0;
-//        if (root.left != null) {
-//            maxDepth(root.left);
-//        }
-//        if (root.right != null) {
-//            maxDepth(root.right);
-//        }
         if (root == null) {
             return 0;
         } else {
-            int left_height = maxDepth(root.left);
-            int right_height = maxDepth(root.right);
-            return Math.max(left_height, right_height) + 1;
+            int leftHeight = maxDepth(root.left);
+            int rightHeight = maxDepth(root.right);
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+
+    //BFS
+    public int maxDepth2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            Queue<TreeNode> queue = new LinkedList<>();
+            int depth = 0;
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                depth ++;
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = queue.poll();
+                    if (node.left != null) {
+                        queue.add(node.left);
+                    }
+                    if (node.right != null) {
+                        queue.add(node.right);
+                    }
+                }
+            }
+            return depth;
         }
     }
 
@@ -49,7 +69,7 @@ public class MaximumDepthOfBinaryTree {
                         new TreeNode(15, null, null),
                         new TreeNode(7, null, null)));
         MaximumDepthOfBinaryTree depth = new MaximumDepthOfBinaryTree();
-        int i = depth.maxDepth(node);
+        int i = depth.maxDepth2(node);
         System.out.println(i);
     }
 }
