@@ -59,6 +59,10 @@ public class ValidateBinarySearchTree {
 
 
     //方法二 广度优先遍历
+    private Queue<TreeNode> queue = new LinkedList<>();
+    private Queue<Integer> lowers = new LinkedList<>();
+    private Queue<Integer> uppers = new LinkedList<>();
+
     public boolean isValidBST2(TreeNode root) {
         Integer upper = null, lower = null, val;
         update(root, upper, lower);
@@ -83,10 +87,6 @@ public class ValidateBinarySearchTree {
         lowers.add(lower);
     }
 
-    private Queue<TreeNode> queue = new LinkedList<>();
-    private Queue<Integer> lowers = new LinkedList<>();
-    private Queue<Integer> uppers = new LinkedList<>();
-
 
     //方法三 中序遍历
     public boolean isValidBST3(TreeNode root) {
@@ -105,6 +105,19 @@ public class ValidateBinarySearchTree {
             root = root.right;
         }
         return true;
+    }
+
+    //中序遍历 plus
+    long pre = Long.MIN_VALUE;
+
+    public boolean isValidBST4(TreeNode root) {
+        if (root == null) return true;
+        //访问左子树
+        if (!isValidBST4(root.left)) return false;
+        if (root.val <= pre) return false;
+        pre = root.val;
+        //访问右子树
+        return isValidBST4(root.right);
     }
 
     public static void main(String[] args) {
