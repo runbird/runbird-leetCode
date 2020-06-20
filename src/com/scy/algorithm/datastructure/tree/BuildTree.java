@@ -10,4 +10,11 @@ package com.scy.algorithm.datastructure.tree;
  */
 public class BuildTree {
 
+    public static BST<Integer> build(int[] nums) {
+        BST<Integer> bst = new BST<>();
+        for (int num : nums) {
+            bst.add(num);
+        }
+        return bst;
+    }
 }

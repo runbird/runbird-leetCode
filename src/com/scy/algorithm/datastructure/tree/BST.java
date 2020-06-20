@@ -44,15 +44,24 @@ public class BST<E extends Comparable<E>> {
         return size == 0;
     }
 
-    //增加节点
-//    public void add(E e) {
-//        if (root == null) {
-//            root = new Node(e);
-//            size++;
-//        } else {
-//            add(e, root);
-//        }
-//    }
+
+    public void add(E e) {
+        add(e, root);
+    }
+
+    //以Node为根节点插入E，并且返回根节点
+    private Node add(E e, Node node) {
+        if (node == null) {
+            size++;
+            return new Node(e);
+        }
+        if (e.compareTo(node.e) > 0) {
+            node.right = add(e, node.right);
+        } else {
+            node.left = add(e, node.left);
+        }
+        return node;
+    }
 
     //以Node为根的BST插入E
 //    private void add(E e, Node node) {
@@ -75,24 +84,6 @@ public class BST<E extends Comparable<E>> {
 //            add(e, node.left);
 //        }
 //    }
-
-    public void add(E e) {
-        add(e, root);
-    }
-
-    //以Node为根节点插入E，并且返回根节点
-    private Node add(E e, Node node) {
-        if (node == null) {
-            size++;
-            return new Node(e);
-        }
-        if (e.compareTo(node.e) > 0) {
-            node.right = add(e, node.right);
-        } else {
-            node.left = add(e, node.left);
-        }
-        return node;
-    }
 }
 
 
