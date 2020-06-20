@@ -26,7 +26,7 @@ import java.util.Random;
  * @author: Suocaiyuan
  * @date: 2020-06-20 10:38
  **/
-public class ConvertSortedArrayToBinarySearchTree {
+public class ConvertSortedArrayToBST {
 
     int[] nums;
     public TreeNode sortedArrayToBST(int[] nums) {
@@ -40,7 +40,7 @@ public class ConvertSortedArrayToBinarySearchTree {
         int mid = (left + right) / 2;
         //始终选择中间节点作为根节点是保证高度不大于1的保证
         //而偶数个数中，始终选择左节点或右节点作为根节点，结果是不一样的
-        TreeNode root = new TreeNode(mid);
+        TreeNode root = new TreeNode(nums[mid]);
         root.left = helper(left, mid-1);
         root.right = helper(mid +1 , right);
         return root;
@@ -51,7 +51,7 @@ public class ConvertSortedArrayToBinarySearchTree {
         if (left > right) return null;
         int mid = (left + right) / 2;
         if ((left + right) %2 == 0) mid ++;
-        TreeNode root = new TreeNode(mid);
+        TreeNode root = new TreeNode(nums[mid]);
         root.left = helper(left, mid-1);
         root.right = helper(mid +1 , right);
         return root;
@@ -66,7 +66,7 @@ public class ConvertSortedArrayToBinarySearchTree {
         if ((left + right) % 2 == 1) {
             mid += random.nextInt(2);
         }
-        TreeNode root = new TreeNode(mid);
+        TreeNode root = new TreeNode(nums[mid]);
         root.left = helper3(left, mid - 1);
         root.right = helper3(mid +1, right);
         return root;
