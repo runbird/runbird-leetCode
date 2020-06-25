@@ -34,32 +34,33 @@ public class FirstBadVersion extends BaseVersionControl{
     }
 
     public int firstBadVersion(int n) {
-        if (isBadVersion(n) && !isBadVersion(n - 1)) return n;
-
-        int mid = n / 2;
-        if (!isBadVersion(mid) ) {
-            if (!isBadVersion(mid + 1)) {
-                mid = (n + mid + 1) / 2;
-                firstBadVersion(mid);
+        int left = 1;
+        int right = n;
+        while (left < right) {
+            //避免数值越界
+            int mid = left + (right - left) / 2;
+            if (!isBadVersion(mid)) {
+                left = mid + 1;
             } else {
-                return mid;
+                right = mid;
             }
         }
-        if (!isBadVersion(mid) ) {
+        return left;
+    }
 
-            if (!isBadVersion(mid - 1)) {
-                mid = (mid - 1) / 2;
-                firstBadVersion(mid);
-            } else {
-                return mid;
+    //方法一 线性查找
+    public int firstBadVersion1(int n) {
+        for (int i = 0; i < n; i++) {
+            if (isBadVersion(i)) {
+                return i;
             }
         }
-        return mid;
+        return n;
     }
 
     public static void main(String[] args) {
         FirstBadVersion fbv = new FirstBadVersion();
-        System.out.println(fbv.firstBadVersion(12));
+        System.out.println(fbv.firstBadVersion(11));
     }
 }
 
