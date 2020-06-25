@@ -1,7 +1,5 @@
 package com.scy.algorithm.dynamicprogramming;
 
-import java.util.Arrays;
-
 /**
  * 类名： BestTimeToBuyAndSellStock <br>
  * 描述：给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
@@ -33,10 +31,7 @@ public class BestTimeToBuyAndSellStock {
     public int maxProfit(int[] prices) {
         int max = 0;
         for (int i = 0; i < prices.length - 1; i++) {
-            for (int j = i; j < prices.length; j++) {
-                if (prices[i] > prices[j]) {
-                    continue;
-                }
+            for (int j = i + 1; j < prices.length; j++) {
                 if (prices[i] < prices[j]) {
                     max = Math.max(max, prices[j] - prices[i]);
                 }
