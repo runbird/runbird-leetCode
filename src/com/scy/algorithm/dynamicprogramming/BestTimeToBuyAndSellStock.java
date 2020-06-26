@@ -40,10 +40,24 @@ public class BestTimeToBuyAndSellStock {
         return max;
     }
 
+    //方法二 一次遍历
+    public int maxProfit2(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else if (maxProfit < prices[i] - minPrice){
+                maxProfit = prices[i] - minPrice;
+            }
+        }
+        return maxProfit;
+    }
+
     public static void main(String[] args) {
         int[] prices = {7, 1, 5, 3, 6, 4};
         BestTimeToBuyAndSellStock best = new BestTimeToBuyAndSellStock();
-        System.out.println(best.maxProfit(prices));
+        System.out.println(best.maxProfit2(prices));
     }
 
 }
