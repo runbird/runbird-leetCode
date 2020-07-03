@@ -1,5 +1,6 @@
 package com.scy.algorithm.heap;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -46,18 +47,56 @@ public class KthSmallestElementInASortedMatrix {
    // 链接：https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/solution/you-xu-ju-zhen-zhong-di-kxiao-de-yuan-su-by-leetco/
    //TODO
     public int kthSmallest2(int[][] matrix, int k) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[0] - b[0]);
+        //PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[0] - b[0]);
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        //    public static int compare(int x, int y) {
+        //        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+        //    }
         int n = matrix.length;
         for (int i = 0; i < n; i++) {
             pq.offer(new int[]{matrix[i][0], i, 0});
         }
         for (int i = 0; i < k - 1; i++) {
             int[] now = pq.poll();
-            if (now[2] != n - 1) {
+            if (now != null && now[2] != n - 1) {
                 pq.offer(new int[]{matrix[now[1]][now[2] + 1], now[1], now[2] + 1});
             }
         }
         return pq.peek() == null ? -1 : pq.peek()[0];
+    }
+
+    //方法三
+    //TODO
+    public int kthSmallest3(int[][] matrix, int k) {
+        int n = matrix.length - 1;
+        int l = matrix[0][0];
+        int r = matrix[n][n];
+        while(l < r){
+            int mid = l + (r - l)/2;
+            int count = countNotMoreThanMid(matrix,mid,n);
+            if(count < k){
+                l = mid + 1;
+            }else{
+                r = mid;
+            }
+        }
+        return l;
+    }
+
+
+    public int countNotMoreThanMid(int[][] matrix,int mid,int n){
+        int row = n;
+        int column = 0;
+        int count = 0;
+        while(row >=0&&column <= n){
+            if(matrix[row][column] <= mid){
+                count = count + row + 1;
+                column++;
+            }else{
+                row--;
+            }
+        }
+        return count;
     }
 
 

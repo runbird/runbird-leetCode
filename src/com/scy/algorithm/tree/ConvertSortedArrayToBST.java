@@ -38,7 +38,7 @@ public class ConvertSortedArrayToBST {
     private TreeNode helper(int left ,int right) {
         if (left > right) return null;
         int mid = (left + right) / 2;
-        //始终选择中间节点作为根节点是保证高度不大于1的保证
+        //选择中间数字作为二叉搜索树的根节点，这样分给左右子树的数字个数相同或只相差 1，可以使得树保持平衡
         //而偶数个数中，始终选择左节点或右节点作为根节点，结果是不一样的
         TreeNode root = new TreeNode(nums[mid]);
         root.left = helper(left, mid-1);
@@ -73,6 +73,8 @@ public class ConvertSortedArrayToBST {
     }
 
     public static void main(String[] args) {
-
+        int[] nums = {-10,-3,0,5,9};
+        ConvertSortedArrayToBST csa = new ConvertSortedArrayToBST();
+        csa.sortedArrayToBST(nums);
     }
 }
