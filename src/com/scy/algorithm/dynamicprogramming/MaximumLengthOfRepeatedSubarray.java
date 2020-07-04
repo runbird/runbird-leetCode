@@ -1,5 +1,7 @@
 package com.scy.algorithm.dynamicprogramming;
 
+import java.util.jar.JarEntry;
+
 /**
  * 类名： MaximumLengthOfRepeatedSubarray <br>
  * 描述：给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。
@@ -71,6 +73,28 @@ public class MaximumLengthOfRepeatedSubarray {
         return ret;
     }
 
+    //方法三 动态规划
+    public int findLength3(int[] A, int[] B) {
+        int[][] dp = new int[A.length][B.length];
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < A.length - 1; i++) {
+            for (int j = 0; j < B.length - 1; j++) {
+                if (A[i] == B[i]) {
+                    if (i - 1 < 0 || j - 1 < 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                    }
+                } else {
+                    dp[i][j] = 0;
+                }
+                if (result < dp[i][j]) {
+                    result = dp[i][j];
+                }
+            }
+        }
+        return result;
+    }
 
 
     public static void main(String[] args) {
