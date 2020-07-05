@@ -5,19 +5,19 @@ import java.util.Map;
 
 /**
  * @desc: 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
- *
+ * <p>
  * 示例 1:
- *
+ * <p>
  * 输入: "abcabcbb"
  * 输出: 3
  * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
  * 示例 2:
- *
+ * <p>
  * 输入: "bbbbb"
  * 输出: 1
  * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
  * 示例 3:
- *
+ * <p>
  * 输入: "pwwkew"
  * 输出: 3
  * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
@@ -48,10 +48,44 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return maxLength;
     }
 
+    public int lengthOfLongestSubstring2(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0, length = s.length();
+        for (int end = 0, start = 0; end < length; end++) {
+            char alpha = s.charAt(end);
+            if (map.containsKey(alpha)) {
+                start = Math.max(map.get(alpha), start);
+            }
+            max = Math.max(max, end - start + 1);
+            map.put(s.charAt(end), end + 1);
+        }
+        return max;
+    }
+
+
+    public int lengthOfLongestSubstringError(String s) {
+        int length = s.length(), max = 0;
+        Map<Character,Integer> map = new HashMap<>();
+        for(int start = 0,end = 0; end < length; end++){
+            char ch  = s.charAt(end);
+            if(map.containsKey(ch)){
+              //  start = end;  s = "dvdf" ,start会多移动导致计算错误
+              //  start = Math.max(map.get(ch), start) + 1; s = "tmmzuxt" ,最后一个t的时候，start= max(0,2)+1
+                start = Math.max(map.get(ch), start) + 1;
+            }
+            max = Math.max(max,end-start+1);
+           // map.put(ch,end++); end++ 和 end +1 区别。。。
+            map.put(ch,end);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
-        String str = "pwwkew";
+       // String str = "pwwkew";
+      //  String str = "dvdf";
+        String str = "tmmzuxt";
         LongestSubstringWithoutRepeatingCharacters s = new LongestSubstringWithoutRepeatingCharacters();
-        int i = s.lengthOfLongestSubstring(str);
+        int i = s.lengthOfLongestSubstringError(str);
         System.out.println(i);
     }
 }
