@@ -42,6 +42,22 @@ public class SubarraySumEqualsKSubmissions {
         return count;
     }
 
+    //    链接：https://leetcode-cn.com/problems/subarray-sum-equals-k/solution/he-wei-kde-zi-shu-zu-by-leetcode-solution/
+    public int subarraySumPro(int[] nums, int k) {
+        int count = 0;
+        for (int start = 0; start < nums.length; ++start) {
+            int sum = 0;
+            for (int end = start; end >= 0; --end) {
+                sum += nums[end];
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
     //方法二 前缀和求解 哈希表优化
     public int subarraySum2(int[] nums, int k) {
         Map<Integer, Integer> dict = new HashMap<>();
