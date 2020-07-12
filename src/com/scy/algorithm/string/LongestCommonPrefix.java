@@ -53,29 +53,27 @@ public class LongestCommonPrefix {
     }
 
 
-//        public String longestCommonPrefix(String[] strs) {
-//        if (strs == null || strs.length == 0 || strs[0].equals("")) return "";
-//
-//        int length = strs.length;
-//        StringBuilder result = new StringBuilder();
-//        boolean ifCommon  = true;
-//        for (int i = 0; i < length; i++) {
-//            char ch = strs[0].charAt(i);
-//            for (int j = 1; j < strs[i].length(); j++) {
-//                char chj = strs[j].charAt(i);
-//                if (ch != chj) ifCommon  = false;
-//            }
-//            if (ifCommon){
-//                String s = Character.toString(ch);
-//                result.append(s);
-//            }
-//        }
-//        return result.toString();
-//    }
+    public String longestCommonPrefixPro(String[] strs) {
+        if (strs == null || strs.length == 0) return "";
+        String ans = strs[0];
+
+        for (int i = 1; i < strs.length; i++) {
+            int j = 0;
+            for (; j < strs[i].length() && j < ans.length(); j++) {
+                if (ans.charAt(j) != strs[i].charAt(j)) {
+                    break;
+                }
+            }
+            ans = ans.substring(0, j);
+            if ("".equals(ans)) return ans;
+        }
+        return ans;
+    }
+
 
     public static void main(String[] args) {
-        String[] source = {"flower","flow","flight"};
-       // String[] source = {"dog","racecar","car"};
+       // String[] source = {"flower","flow","flight"};
+        String[] source = {"dog","racecar","car"};
        // String[] source = {""};
        // String[] source = {"a","b"};
         LongestCommonPrefix longestCommonPrefix = new LongestCommonPrefix();

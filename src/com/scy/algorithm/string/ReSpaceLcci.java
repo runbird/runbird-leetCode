@@ -34,7 +34,7 @@ import java.util.Set;
  */
 public class ReSpaceLcci {
 
-    //        链接：https://leetcode-cn.com/problems/re-space-lcci/solution/hui-fu-kong-ge-by-leetcode-solution/
+    // 链接：https://leetcode-cn.com/problems/re-space-lcci/solution/hui-fu-kong-ge-by-leetcode-solution/
     // Trie + 动态规划
     public int respace(String[] dictionary, String sentence) {
         int n = sentence.length();
