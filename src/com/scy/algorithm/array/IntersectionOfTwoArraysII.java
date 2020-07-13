@@ -86,8 +86,34 @@ public class IntersectionOfTwoArraysII {
         return Arrays.copyOfRange(nums1, 0, k);
     }
 
+    public int[] intersect3(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int up = 0 , down = 0;
+        List<Integer> res = new ArrayList<>();
+        while (up < nums1.length && down < nums2.length) {
+            if (nums1[up] == nums2[down]){
+                res.add(nums1[up]);
+                up ++ ; down ++;
+                continue;
+            }
 
-    public static void main(String[] args) {
+            if (nums1[up] > nums2[down]) {
+                down++;
+            } else {
+                up ++;
+            }
+        }
+        int[] ans = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+
+
+
+        public static void main(String[] args) {
         IntersectionOfTwoArraysII list = new IntersectionOfTwoArraysII();
         int[] nums1 = {1, 2, 2, 1};
         int[] nums2 = {2, 2};
