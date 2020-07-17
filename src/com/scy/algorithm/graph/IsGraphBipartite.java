@@ -1,4 +1,4 @@
-package com.scy.graph;
+package com.scy.algorithm.graph;
 
 import java.util.Arrays;
 
