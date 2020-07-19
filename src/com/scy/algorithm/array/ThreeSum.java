@@ -3,6 +3,7 @@ package com.scy.algorithm.array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.jar.JarEntry;
 
 /**
  * 给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
@@ -23,13 +24,11 @@ public class ThreeSum {
 
 
     public static List<List<Integer>> threeSum(int[] nums) {
-        if (nums.length == 0) {
-            return new ArrayList<>();
-        }
-        Arrays.sort(nums);
         List<List<Integer>> results = new ArrayList<>();
-
-        for (int i = 0; i < nums.length - 2; i++) {
+        int n = nums.length - 1;
+        if (n < 3) return results;
+        Arrays.sort(nums);
+        for (int i = 0; i < n; i++) {
             //去除重复元素
             if (i == 0 || nums[i] != nums[i - 1]) {
                 //创建两个指针
@@ -56,9 +55,36 @@ public class ThreeSum {
         return results;
     }
 
+    public static List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> results = new ArrayList<>();
+        int n = nums.length - 1;
+        if (n < 3) return results;
+        Arrays.sort(nums);
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) break;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                int sum = nums[l] + nums[i] + nums[r];
+                if (sum == 0) {
+                    results.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                    while (l < r && nums[l] == nums[l + 1]) l++;
+                    while (l < r && nums[r] == nums[r - 1]) r--;
+                    l++;
+                    r--;
+                }else if (sum < 0){
+                    l++;
+                }else {
+                    r--;
+                }
+            }
+        }
+        return results;
+    }
+
     public static void main(String[] args) {
         int[] nums = {-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6};
-        List<List<Integer>> lists = ThreeSum.threeSum(nums);
+        List<List<Integer>> lists = ThreeSum.threeSum2(nums);
         System.out.println(lists);
     }
 }
