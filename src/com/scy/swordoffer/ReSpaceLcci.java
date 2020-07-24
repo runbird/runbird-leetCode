@@ -1,4 +1,4 @@
-package com.scy.algorithm.string;
+package com.scy.swordoffer;
 
 import java.util.Arrays;
 import java.util.HashSet;

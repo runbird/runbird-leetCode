@@ -1,10 +1,8 @@
-package com.scy.algorithm.linkedlist;
+package com.scy.swordoffer;
 
 import com.scy.algorithm.datastructure.array.ListNode;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**

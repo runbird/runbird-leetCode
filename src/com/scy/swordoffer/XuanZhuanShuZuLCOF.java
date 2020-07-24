@@ -1,4 +1,4 @@
-package com.scy.algorithm.array;
+package com.scy.swordoffer;
 
 /**
  * 类名： XuanZhuanShuZuLCOF <br>
