@@ -23,7 +23,7 @@ import java.util.Map;
  * 0 <= S <= A.length
  * A[i] 为 0 或 1
  *
- * 来源：力扣（LeetCode）
+ * 来源：力扣（LeetCode）930
  * 链接：https://leetcode-cn.com/problems/binary-subarrays-with-sum
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 <br>
  * 创建日期： 2020/1/2 <br>
@@ -109,8 +109,28 @@ public class BinarySubarraysWithSum {
         return ans;
     }
 
+    //前缀和法
+    //F[i] = A[0]+....+A[i-1]
+    //F[j+1] - F[i] = A[i] + ... A[j]
+    public int test(int[] A, int S) {
+        int length = A.length;
+        int[] F = new int[length + 1];
+        for (int i = 0; i < length; i++) {
+            F[i + 1] = F[i] + A[i];
+        }
+        Map<Integer, Integer> dict = new HashMap<>();
+        int ans = 0;
+        for (int x : F) {
+            ans += dict.getOrDefault(x, 0);
+            dict.put(x + S, dict.getOrDefault(x + S,0) + 1);
+        }
+        return ans;
+    }
+
 
     public static void main(String[] args) {
-
+        int[] A = new int[]{1,0,1,0,1};
+        int S = 2;
+        System.out.println(new BinarySubarraysWithSum().test(A,S));
     }
 }
