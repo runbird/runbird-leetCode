@@ -56,6 +56,7 @@ public class TopKFrequentElements {
                 source.put(num, source.get(num) + 1);
             else
                 source.put(num, 1);
+//            source.put(num, source.getOrDefault(num, 1));
         }
 
         PriorityQueue<Frequence> queue = new PriorityQueue<>();
