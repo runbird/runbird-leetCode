@@ -1,5 +1,7 @@
 package com.scy.algorithm.datastructure.array;
 
+import java.util.Objects;
+
 /**
  * @desc:
  * @author: Suocaiyuan
@@ -51,5 +53,19 @@ public class ListNode {
         }
         s.append("NULL");
         return s.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ListNode listNode = (ListNode) o;
+        return val == listNode.val &&
+                Objects.equals(next, listNode.next);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(val, next);
     }
 }
