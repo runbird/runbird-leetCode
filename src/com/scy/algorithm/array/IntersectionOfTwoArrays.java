@@ -1,8 +1,6 @@
 package com.scy.algorithm.array;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.Arrays;
 import java.util.TreeSet;
 
 /**
@@ -48,5 +46,29 @@ public class IntersectionOfTwoArrays {
             nums[index++] = num;
         }
         return nums;
+    }
+
+    //双指针法
+    public int[] intersection2(int[] nums1, int[] nums2) {
+        int length1 = nums1.length, length2 = nums2.length;
+        int[] target = new int[length1 + length2];
+        int index0 = 0, index1 = 0, index2 = 0;
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        while (index1 < nums1.length && index2 < nums2.length) {
+            int num1 = nums1[index1], num2 = nums2[index2];
+            if (num1 == num2) {
+                if (index0 == 0 || num1 != target[index0 - 1]) {
+                    target[index0++] = num1;
+                }
+                index1++;
+                index2++;
+            } else if (num1 > num2) {
+                index2++;
+            } else {
+                index1++;
+            }
+        }
+        return Arrays.copyOfRange(target, 0, index0);
     }
 }
