@@ -41,7 +41,7 @@ public class NumberOfSubmatricesThatSumToTarget {
             //枚举下边界
             for (int j = i; j < m; j++) {
                 for (int k = 0; k < n; k++) {
-                    sum[k] = matrix[i][j];
+                    sum[k] += matrix[j][k];
                 }
                 ans += subArraySum(sum, target);
             }
