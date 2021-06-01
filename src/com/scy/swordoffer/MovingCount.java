@@ -26,38 +26,34 @@ package com.scy.swordoffer;
 public class MovingCount {
 
    // private int[][] direction = new int[][]{{1, 0, -1, 0}, {0, 1, 0, -1}};
+    private int res;
 
     public int movingCount(int m, int n, int k) {
         if (k == 0) return 1;
-        int result = 0;
         int[][] data = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (dfs(data, i, j, k)) result++;
-            }
-        }
-        return result;
-    }
-
-    private boolean dfs(int[][] data, int i, int j, int start) {
-        if (i < 0 || j < 0 || i >= data.length || j >= data[0].length || data[i][j] != 0) return false;
-        data[i][j] = 1;
-        int leftV = calcu(i);
-        int rightV = calcu(j);
-        if ((leftV + rightV) > start) return false;
-        boolean res = dfs(data, i + 1, j, start) || dfs(data, i - 1, j, start) || dfs(data, i, j + 1, start) || dfs(data, i, j + 1, start);
-        data[i][j] = 0;
+        dfs(data, 0, 0, 0, k);
         return res;
     }
 
     private int calcu(int i) {
         int leftV = 0;
-        while (i / 10 != 0){
+        while (i / 10 != 0) {
             leftV += i % 10;
             i /= 10;
         }
         leftV += i % 10;
         return leftV;
+    }
+
+    private void dfs(int[][] data, int i, int j, int start, int k) {
+        if (i < 0 || j < 0 || i >= data.length || j >= data[0].length || data[i][j] != 0) return;
+        int leftV = calcu(i);
+        int rightV = calcu(j);
+        if ((leftV + rightV) > k) return;
+        data[i][j] = 1;
+        res += 1;
+        dfs(data, i + 1, j, start, k);
+        dfs(data, i, j + 1, start, k);
     }
 
     public static void main(String[] args) {
