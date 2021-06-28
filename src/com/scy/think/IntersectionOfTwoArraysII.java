@@ -1,4 +1,4 @@
-package com.scy.algorithm.think;
+package com.scy.think;
 
 import java.util.*;
 
