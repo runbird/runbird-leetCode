@@ -52,6 +52,7 @@ public class RemoveLinkedListElements {
             listNode.setNext(new ListNode(integers.indexOf(i)));
         }
         System.out.println(listNode.toString());
+        System.out.println(new RemoveLinkedListElements().removeElements(listNode, 6));
     }
 
 
