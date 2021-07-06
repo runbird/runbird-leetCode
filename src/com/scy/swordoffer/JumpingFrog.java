@@ -22,7 +22,7 @@ package com.scy.swordoffer;
  * 0 <= n <= 100 <br>
  *
  * 来源：力扣（LeetCode）剑指 Offer 10- II. 青蛙跳台阶问题
- * 链接：https://leetcode-cn.com/problems/invert-binary-tree
+ * 链接：https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 <br>
  * 创建日期： 2020/9/16 <br>
  *
@@ -30,11 +30,16 @@ package com.scy.swordoffer;
  * @version V1.0
  */
 public class JumpingFrog {
-//    public int numWays(int n) {
-//        if (n < 0) return 1;
-//    }
-//
-//    public int recur(int n) {
-//
-//    }
+    public int numWays(int n) {
+        if (n == 0) return 1;
+        int num = 1000000007;
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i < n + 1; i++) {
+            dp[i] = (dp[i - 1] + dp[i - 2]) % num;
+        }
+        return dp[n];
+    }
+
 }
