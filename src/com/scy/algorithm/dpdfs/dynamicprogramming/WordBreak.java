@@ -38,6 +38,7 @@ import java.util.Set;
  */
 public class WordBreak {
 
+    //更优的方法
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> words = new HashSet<>(wordDict);
         boolean[] dp = new boolean[s.length() + 1];
@@ -46,6 +47,28 @@ public class WordBreak {
             for (int j = 0; j < i; j++) {
                 if (dp[j] && words.contains(s.substring(j, i))) {
                     dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
+    //https://mp.weixin.qq.com/s?__biz=MzU0ODMyNDk0Mw==&mid=2247491645&idx=1&sn=456bb5dd519be3fafa1bcb08d73d8944&chksm=fb42731dcc35fa0bf914ae98e51a26e6a6c5d2b8c77a90dc1abde6625daeaa6cacb3b2376bdc&scene=21#wechat_redirect
+    public boolean wordBreak2(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length() + 1];
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j <= i; j++) {
+                //如果往前截取全部字符串，我们直接判断子串[0,i-1]
+                //是否存在于字典wordDict中即可
+                if (i == j && wordDict.contains(s.substring(j,i))) {
+                    dp[i] = true;
+                    continue;
+                }
+                //如果dp[i]为true，说明前i个字符串结果拆解可以让他的所有子串
+                //都存在于字典wordDict中，直接终止内层循环，不用再计算dp[i]了。
+                dp[i] = dp[i - j] && wordDict.contains(s.substring(i - j, i));
+                if (dp[i]) {
                     break;
                 }
             }
