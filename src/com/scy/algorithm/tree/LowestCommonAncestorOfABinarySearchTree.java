@@ -63,6 +63,8 @@ public class LowestCommonAncestorOfABinarySearchTree {
         return result;
     }
 
+    //递归写法参考LowestCommonAncestorOfABinaryTree
+
     public static void main(String[] args) {
         int x = 4;
         System.out.println("Value" + ((x>4)?88.8:8));

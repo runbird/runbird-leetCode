@@ -6,7 +6,7 @@ package com.scy.algorithm;
  * @author: Suocaiyuan
  * @date: 2021-07-07 23:19
  **/
-public class Test {
+public class Test_Byte_Dance {
 
 
     //输入: logs = [[1, 0, 5], [2, 0, 6], [3, 0, 3], [4, 1, 2], [5, 1, 3], [6, 2, 3], [7, 3, 4], [8, 4, 6]]

@@ -34,9 +34,18 @@ public class LongestPalindrome {
         int ans = 0;
         int mark = -2;
         for (int i = 0; i < map.length; i++) {
+            // -2 在32机制为 11111111 11111111 11111111 11111110
+            // map[i]如果为偶数则 则 ans + map[i]； 否则 ans + map[i] - 1
             ans += mark & map[i];
         }
         //理解最长的要求，比如 abba 满足要求，但如果 < length,不是最长，加1个字母构成最长 abXba
         return ans < s.length() ? ans + 1 : ans;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(1 & 1);
+        System.out.println(1 & 0);
+        System.out.println(0 & 0);
+        System.out.println(0 & 1);
     }
 }
