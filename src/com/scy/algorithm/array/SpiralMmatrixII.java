@@ -45,6 +45,24 @@ public class SpiralMmatrixII {
         return result;
     }
 
+    //By Myself
+    public int[][] generateMatrix2(int n) {
+        if(n == 1) return new int[][]{{1}};
+        int[][] ans = new int[n][n];
+        int l = 0, r = n - 1, t = 0 , b = n - 1, x = 0;
+        while(true){
+            for(int i = l; i <= r; i++) ans[t][i] = ++x;
+            if(++t > b) break;
+            for(int i = t; i <= b; i++) ans[i][r] = ++x;
+            if(--r < l) break;
+            for(int i = r; i >= l; i--) ans[b][i] = ++x;
+            if(--b < t) break;
+            for(int i = b; i >= t; i--) ans[i][l] = ++x;
+            if(++l > r) break;
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         SpiralMmatrixII spiralMmatrixII = new SpiralMmatrixII();
         int[][] s = spiralMmatrixII.generateMatrix(3);
