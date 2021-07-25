@@ -1,6 +1,5 @@
 package com.scy.algorithm.string;
 
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 
 /**
  * 类名： ValidNumber <br>

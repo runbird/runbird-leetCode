@@ -25,7 +25,22 @@ public class Test_Byte_Dance {
         return res;
     }
 
+    public int test(int a ,int b) {
+        return a+ b;
+    }
+
     public static void main(String[] args) {
 
+    }
+}
+
+class TestB extends Test_Byte_Dance{
+    public int test(Integer a, Integer b) {
+        return a+ b;
+    }
+
+    @Override
+    public int test(int a, int b) {
+        return super.test(a, b);
     }
 }

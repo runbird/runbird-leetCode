@@ -1,8 +1,5 @@
 package com.scy.algorithm.dpdfs.dynamicprogramming;
 
-import com.sun.deploy.util.UpdateCheck;
-
-import javax.sql.PooledConnection;
 import java.util.*;
 
 /**
