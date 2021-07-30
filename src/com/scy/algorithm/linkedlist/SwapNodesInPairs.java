@@ -2,8 +2,6 @@ package com.scy.algorithm.linkedlist;
 
 import com.scy.algorithm.datastructure.array.ListNode;
 
-import java.util.LinkedList;
-
 /**
  * 类名： SwapNodesInPairs <br>
  * 描述：给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
@@ -22,7 +20,9 @@ import java.util.LinkedList;
  */
 public class SwapNodesInPairs {
 
-    /** 递归方法 */
+    /**
+     * 递归方法
+     */
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null)
             return head;
@@ -36,7 +36,7 @@ public class SwapNodesInPairs {
         ListNode pre = new ListNode(0);
         pre.next = head;
         ListNode temp = pre;
-        while(temp.next != null && temp.next.next != null) {
+        while (temp.next != null && temp.next.next != null) {
             ListNode start = temp.next;
             ListNode end = temp.next.next;
             temp.next = end;
@@ -45,6 +45,45 @@ public class SwapNodesInPairs {
             temp = start;
         }
         return pre.next;
+    }
+
+
+    public ListNode swapPairs3(ListNode head) {
+        ListNode odd = new ListNode(-1);
+        ListNode oddDummy = odd;
+        ListNode even = new ListNode(-1);
+        ListNode evenDummy = even;
+        ListNode p = head;
+        for (int i = 0; p != null; i++) {
+            ListNode next = p.next;
+            if ((i & 1) == 1) {
+                odd.next = p;
+                odd = p;
+            } else {
+                even.next = p;
+                even = p;
+            }
+            p = next;
+        }
+        return mergeList(oddDummy.next, evenDummy.next);
+    }
+
+    private ListNode mergeList(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode tail = dummy;
+        while (l1 != null || l2 != null) {
+            if (l1 != null) {
+                tail.next = l1;
+                tail = tail.next;
+                l1 = l1.next;
+            } else {
+                tail.next = l2;
+                tail = tail.next;
+                l2 = l2.next;
+            }
+        }
+        tail.next = null;
+        return dummy.next;
     }
 
 
