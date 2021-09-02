@@ -1,6 +1,9 @@
 package com.scy.algorithm.tree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * @desc:
@@ -28,7 +31,7 @@ import java.util.*;
  **/
 public class AverageOfLevelsInBinaryTree {
 
-    //方法一 广度优先遍历
+    //方法一 深度优先遍历
     public List<Double> averageOfLevels(TreeNode root) {
         List<Integer> counts = new ArrayList<>();
         List<Double> sums = new ArrayList<>();
@@ -56,7 +59,7 @@ public class AverageOfLevelsInBinaryTree {
         dfs(root.right, level + 1, counts, sums);
     }
 
-    //方法二 深度优先遍历
+    //方法二 广度优先遍历
     public List<Double> averageOfLevels2(TreeNode root) {
         List<Double> ans = new ArrayList<>();
         if (root == null) return ans;
