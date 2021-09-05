@@ -34,8 +34,7 @@ public class ClimbingStairs {
 
     //方法一 递归 时间复杂度o(n^2)
     public int climbStairs1(int n) {
-        if (n == 1) return 1;
-        if (n == 2) return 2;
+        if (n <= 2) return n;
         return climbStairs1(n - 1) + climbStairs1(n - 2);
     }
 

@@ -31,18 +31,6 @@ package com.scy.algorithm.dpdfs.dynamicprogramming;
  */
 public class HouseRobber {
 
-    //[2,1,1,2]
-    public int robError(int[] nums) {
-        int planA = 0 , planB = 0;
-        for (int i = 0; i < nums.length; i+=2) {
-            planA += nums[i];
-        }
-        for (int i = 1; i < nums.length; i+=2) {
-            planB += nums[i];
-        }
-        return Math.max(planA, planB);
-    }
-
     public int rob(int[] nums) {
         if (nums.length == 0) return 0;
         int[] result = new int[nums.length + 1];
